@@ -1,344 +1,257 @@
+<div align="center">
+
+<img src="public/logobottlelink.png" alt="BottleLink" width="720" />
+
 # BottleLink
 
-![BottleLink Logo](logobottlelink.png)
+**Plataforma de monitorización de enlaces y archivos en la nube**
 
-BottleLink es una plataforma de monitorización, análisis e historial de enlaces y archivos alojados en diferentes servicios de almacenamiento en la nube. **La interfaz está completamente en español.**
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![SQLite](https://img.shields.io/badge/SQLite-3-003b57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-a78bfa?style=flat-square)](LICENSE)
 
-## 🎯 Características
-
-- **Monitorización de enlaces**: Comprobación periódica de enlaces de múltiples proveedores
-- **Detección de cambios**: Identificación de cambios en archivos y metadatos
-- **Historial completo**: Registro de todos los cambios y estados de los enlaces
-- **Análisis multimedia**: Extracción de metadatos de archivos de video/audio con FFmpeg
-- **Dashboard interactivo**: Interfaz web en español para visualizar estadísticas y estado de enlaces
-- **Arquitectura modular**: Sistema extensible para añadir nuevos proveedores fácilmente
-- **Tema oscuro moderno**: Diseño actualizado con modo oscuro y gradientes
-
-## 🚀 Tecnologías
-
-### Backend
-- **Node.js** + **Express** + **TypeScript**
-- **SQLite** para persistencia de datos
-- **node-cron** para tareas programadas (sin Redis/Docker)
-- **FFmpeg** para análisis de archivos multimedia
-
-### Frontend
-- **React** + **TypeScript**
-- **TailwindCSS v4** para estilos
-- **Recharts** para gráficos y visualizaciones
-- **Vite** como bundler
-
-## 📦 Instalación
-
-### Prerrequisitos
-- Node.js 18+
-- FFmpeg (instalado y disponible en el PATH)
-
-### Pasos de instalación
-
-1. **Clonar el repositorio**
-```bash
-git clone <repository-url>
-cd bottlelink
-```
-
-2. **Instalar dependencias**
-```bash
-npm install
-```
-
-3. **Configurar FFmpeg**
-Asegúrate de que FFmpeg esté instalado en tu sistema:
-- **Windows**: Descarga desde [ffmpeg.org](https://ffmpeg.org/download.html) y agrega al PATH
-- **macOS**: `brew install ffmpeg`
-- **Linux**: `sudo apt install ffmpeg` o `sudo yum install ffmpeg`
-
-## 🎮 Uso
-
-### Iniciar el servidor backend
-```bash
-npm run dev:server
-```
-El servidor API estará disponible en `http://localhost:3001/api`
-
-### Iniciar el frontend
-```bash
-npm run dev
-```
-La aplicación web estará disponible en `http://localhost:5173`
-
-### Comandos disponibles
-```bash
-npm run dev:server    # Inicia el servidor backend en modo desarrollo
-npm run dev          # Inicia el frontend en modo desarrollo
-npm run build        # Compila el frontend para producción
-npm run preview      # Previsualiza el build de producción
-npm run lint         # Ejecuta el linter
-```
-
-## 🌐 Proveedores Soportados
-
-- **MEGA** - Servicio de almacenamiento en la nube
-- **MediaFire** - Plataforma de compartir archivos
-- **Google Drive** - Servicio de Google
-- **Dropbox** - Almacenamiento en la nube
-- **OneDrive** - Servicio de Microsoft
-- **Pixeldrain** - Servicio de compartir archivos
-- **HTTP/HTTPS** - Enlaces web genéricos
-
-## 📊 Arquitectura
-
-### Estructura del proyecto
-```
-bottlelink/
-├── src/
-│   ├── server/              # Backend
-│   │   ├── controllers/     # Controladores API
-│   │   ├── models/          # Modelos de base de datos
-│   │   ├── providers/       # Implementaciones de proveedores
-│   │   ├── services/        # Lógica de negocio
-│   │   ├── jobs/            # Tareas programadas
-│   │   └── routes/          # Rutas API
-│   ├── components/          # Componentes React
-│   │   ├── Dashboard.tsx
-│   │   ├── LinkDetails.tsx
-│   │   ├── AddLinkModal.tsx
-│   │   └── StatisticsCharts.tsx
-│   ├── utils/              # Utilidades
-│   └── App.tsx             # Componente principal
-├── public/                 # Archivos estáticos
-│   └── logobottlelink.png  # Logo de la aplicación
-└── database/               # Base de datos SQLite
-```
-
-### API Endpoints
-
-#### Enlaces
-- `GET /api/links` - Obtener todos los enlaces
-- `POST /api/links` - Crear nuevo enlace
-- `GET /api/links/:id` - Obtener detalles de un enlace
-- `DELETE /api/links/:id` - Eliminar enlace
-- `POST /api/links/:id/check` - Verificar enlace manualmente
-
-#### Estadísticas
-- `GET /api/statistics/overall` - Estadísticas generales
-- `GET /api/statistics/status-distribution` - Distribución de estados
-- `GET /api/statistics/provider` - Estadísticas por proveedor
-
-#### Proveedores
-- `GET /api/providers` - Obtener proveedores disponibles
-
-## 🔧 Configuración
-
-### Variables de entorno
-Crea un archivo `.env` en la raíz del proyecto:
-
-```env
-# API Configuration
-VITE_API_BASE=/api
-PORT=3001
-
-# Database (opcional, por defecto usa SQLite)
-DATABASE_PATH=./database/bottlelink.db
-```
-
-## 📈 Estados de Enlaces
-
-- **ACTIVE** - El enlace está funcionando correctamente
-- **DEAD** - El enlace no está disponible
-- **CHANGED** - El contenido del archivo ha cambiado
-- **RESTRICTED** - El enlace tiene restricciones de acceso
-- **ERROR** - Error al verificar el enlace
-- **UNKNOWN** - Estado desconocido
-
-## 🎨 Personalización
-
-### Colores del tema
-El tema usa colores personalizados definidos en `src/index.css`:
-- Brand: Gradiente púrpura (#7c3aed → #a78bfa)
-- Background: #0f0f14 (modo oscuro)
-- Cards: #16161f con bordes #2a2a3a
-
-### Añadir nuevos proveedores
-1. Crea un nuevo archivo en `src/server/providers/`
-2. Implementa la interfaz `Provider`
-3. Regístralo en `ProviderFactory`
-
-## 🤝 Contribución
-
-Las contribuciones son bienvenidas. Por favor:
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📝 Licencia
-
-Este proyecto está bajo la Licencia MIT.
-
-## 👨‍💻 Autor
-
-**BottleLink** - Plataforma de monitorización de enlaces
-
-## 🙏 Agradecimientos
-
-- TailwindCSS por el framework de CSS
-- Recharts por las librerías de gráficos
-- FFmpeg por las herramientas de análisis multimedia
-- La comunidad de código abierto
+</div>
 
 ---
 
-**Desarrollado con ❤️ usando TypeScript y React**
+BottleLink monitoriza automáticamente enlaces de servicios de almacenamiento en la nube, detecta cambios en archivos, registra el historial completo y muestra todo en un dashboard interactivo con tema oscuro.
 
+## ✨ Características
 
-## Proveedores Soportados
+- 🔗 **Monitorización periódica** de enlaces de múltiples proveedores cloud
+- 🔍 **Detección de cambios** en archivos y metadatos (tamaño, codecs, resolución…)
+- 📊 **Dashboard interactivo** con gráficos de distribución y disponibilidad
+- 🎬 **Análisis multimedia** con FFmpeg — extrae duración, resolución, codecs
+- 📜 **Historial completo** de verificaciones y eventos por enlace
+- ⚙️ **Sin Redis ni Docker** — usa SQLite y cron nativo
+- 🌙 **Tema oscuro** con diseño moderno y alto contraste
 
-- MEGA
-- MediaFire
-- Google Drive
-- Dropbox
-- OneDrive
-- Pixeldrain
-- HTTP/HTTPS (genérico)
+## 🌐 Proveedores soportados
 
-## Stack Tecnológico
+| Proveedor | Tipo |
+|---|---|
+| MEGA | Almacenamiento cifrado |
+| MediaFire | Compartir archivos |
+| Google Drive | Suite de Google |
+| Dropbox | Almacenamiento en la nube |
+| OneDrive | Suite de Microsoft |
+| Pixeldrain | Compartir archivos |
+| HTTP / HTTPS | Cualquier enlace web genérico |
 
-- **Backend**: Node.js + Express + TypeScript
-- **Frontend**: React + TailwindCSS + Alpine.js
-- **Base de datos**: SQLite
-- **Cola de trabajos**: BullMQ con Redis
-- **Análisis multimedia**: FFmpeg
+---
 
-## Instalación
+## 🚀 Inicio rápido
 
-1. Clonar el repositorio
-2. Instalar dependencias:
-   ```bash
-   npm install
-   ```
+### Prerrequisitos
 
-3. Configurar Redis (necesario para la cola de trabajos):
-   ```bash
-   # Usar Docker
-   docker run -d -p 6379:6379 redis
-   ```
-
-4. Configurar variables de entorno (opcional):
-   ```bash
-   # .env
-   REDIS_HOST=localhost
-   REDIS_PORT=6379
-   VITE_API_BASE=http://localhost:3001/api
-   ```
-
-## Uso
-
-### Iniciar el servidor backend:
+- **Node.js 18+**
+- **FFmpeg** instalado y disponible en el PATH
 
 ```bash
-npm run dev:server
+# macOS
+brew install ffmpeg
+
+# Ubuntu / Debian
+sudo apt install ffmpeg
+
+# Windows — descargar desde https://ffmpeg.org/download.html
+# y agregar la carpeta bin al PATH del sistema
 ```
 
-El servidor API estará disponible en `http://localhost:3001`
-
-### Iniciar el frontend:
+### 1. Clonar e instalar
 
 ```bash
+git clone <repository-url>
+cd bottlelink
+npm install
+```
+
+### 2. Configurar variables de entorno
+
+```bash
+# Copiar la plantilla
+cp .env.example .env
+```
+
+El archivo `.env` ya viene con valores por defecto listos para desarrollo:
+
+```env
+PORT=3001
+NODE_ENV=development
+DB_PATH=data/bottlelink.db
+API_PREFIX=/api
+PROVIDER_FETCH_TIMEOUT_MS=30000
+VITE_API_BASE=/api
+VITE_SERVER_PORT=3001
+```
+
+> **Nota:** `.env` está en `.gitignore` y nunca se sube al repositorio.  
+> Usa `.env.example` como referencia para otros desarrolladores.
+
+### 3. Poblar con datos de ejemplo *(opcional)*
+
+```bash
+npm run seed
+```
+
+Esto inserta 10 enlaces de ejemplo con diferentes estados, metadatos de archivos, historial de verificaciones y eventos para que el dashboard se vea poblado desde el primer arranque.
+
+### 4. Iniciar el proyecto
+
+Necesitas **dos terminales** — una para el backend y otra para el frontend:
+
+```bash
+# Terminal 1 — Backend (API + workers)
+npm run dev:server
+
+# Terminal 2 — Frontend
 npm run dev
 ```
 
-La aplicación web estará disponible en `http://localhost:5173`
+| Servicio | URL |
+|---|---|
+| Frontend | http://localhost:5173 |
+| API | http://localhost:3001/api |
+| Health check | http://localhost:3001/api/health |
 
-### Iniciar ambos simultáneamente:
+---
 
-En una terminal:
+## 📋 Scripts disponibles
+
 ```bash
-npm run dev:server
+npm run dev          # Frontend en modo desarrollo (Vite HMR)
+npm run dev:server   # Backend en modo desarrollo (nodemon + tsx)
+npm run build        # Compilar frontend para producción
+npm run preview      # Previsualizar el build de producción
+npm run seed         # Insertar datos de ejemplo en la base de datos
+npm run lint         # Ejecutar el linter (oxlint)
 ```
 
-En otra terminal:
-```bash
-npm run dev
+---
+
+## 📡 API Endpoints
+
+### Enlaces
+```
+GET    /api/links                  Listar todos los enlaces
+POST   /api/links                  Crear nuevo enlace
+GET    /api/links/:id              Detalles de un enlace
+PUT    /api/links/:id              Actualizar enlace
+DELETE /api/links/:id              Eliminar enlace
+POST   /api/links/:id/check        Verificar enlace manualmente
+GET    /api/links/:id/history      Historial de verificaciones
+GET    /api/links/:id/events       Eventos del enlace
+GET    /api/links/status/:status   Filtrar por estado
 ```
 
-## API Endpoints
+### Estadísticas
+```
+GET /api/statistics/overall                Estadísticas generales
+GET /api/statistics/providers              Por proveedor
+GET /api/statistics/links/:id             De un enlace específico
+GET /api/statistics/activity               Actividad reciente
+GET /api/statistics/distribution/status   Distribución por estado
+GET /api/statistics/distribution/filetypes Por tipo de archivo
+GET /api/statistics/timebased             Basadas en tiempo
+```
 
-### Links
-- `GET /api/links` - Obtener todos los enlaces
-- `POST /api/links` - Crear nuevo enlace
-- `GET /api/links/:id` - Obtener detalles de un enlace
-- `PUT /api/links/:id` - Actualizar enlace
-- `DELETE /api/links/:id` - Eliminar enlace
-- `POST /api/links/:id/check` - Comprobar enlace inmediatamente
-- `GET /api/links/:id/history` - Obtener historial de comprobaciones
-- `GET /api/links/:id/events` - Obtener eventos del enlace
+### Proveedores
+```
+GET    /api/providers       Listar proveedores
+POST   /api/providers       Crear proveedor
+GET    /api/providers/:id   Detalles
+PUT    /api/providers/:id   Actualizar
+DELETE /api/providers/:id   Eliminar
+```
 
-### Providers
-- `GET /api/providers` - Obtener todos los proveedores
-- `GET /api/providers/:id` - Obtener detalles de un proveedor
-- `POST /api/providers` - Crear nuevo proveedor
-- `PUT /api/providers/:id` - Actualizar proveedor
-- `DELETE /api/providers/:id` - Eliminar proveedor
+### Health
+```
+GET /api/health   Estado del servidor
+```
 
-### Statistics
-- `GET /api/statistics/overall` - Estadísticas generales
-- `GET /api/statistics/providers` - Estadísticas por proveedor
-- `GET /api/statistics/links/:id` - Estadísticas de un enlace
-- `GET /api/statistics/activity` - Actividad reciente
-- `GET /api/statistics/distribution/status` - Distribución por estado
-- `GET /api/statistics/timebased` - Estadísticas temporales
+---
 
-## Estructura del Proyecto
+## 📁 Estructura del proyecto
 
 ```
 bottlelink/
 ├── src/
-│   ├── server/              # Backend
-│   │   ├── controllers/     # Controladores API
-│   │   ├── models/          # Modelos de base de datos
-│   │   ├── providers/       # Adaptadores de proveedores
-│   │   ├── services/        # Lógica de negocio
-│   │   ├── jobs/            # Colas de trabajos
-│   │   ├── routes/          # Rutas API
-│   │   ├── middleware/      # Middleware Express
-│   │   └── index.ts         # Punto de entrada servidor
-│   ├── components/          # Componentes React
-│   ├── utils/              # Utilidades (API client)
-│   ├── App.tsx             # Componente principal
-│   └── main.tsx            # Punto de entrada React
-├── data/                   # Base de datos SQLite
+│   ├── components/              # Componentes React
+│   │   ├── Dashboard.tsx        # Vista principal con stats y tabla
+│   │   ├── LinkDetails.tsx      # Detalle de enlace con historial
+│   │   ├── AddLinkModal.tsx     # Modal para agregar enlace
+│   │   └── StatisticsCharts.tsx # Gráficos con Recharts
+│   ├── utils/
+│   │   └── api.ts               # Cliente HTTP del frontend
+│   ├── App.tsx                  # Componente raíz
+│   ├── main.tsx                 # Punto de entrada React
+│   └── server/
+│       ├── controllers/         # Controladores de la API REST
+│       ├── models/              # Acceso a la base de datos (SQLite)
+│       ├── providers/           # Adaptadores por proveedor cloud
+│       ├── services/            # Lógica de negocio
+│       ├── jobs/                # Workers y cron jobs
+│       ├── routes/              # Definición de rutas Express
+│       ├── middleware/          # Error handler, not-found
+│       ├── seed.ts              # Script de datos de ejemplo
+│       └── index.ts             # Punto de entrada del servidor
+├── data/                        # Base de datos SQLite (auto-creada)
+├── public/                      # Archivos estáticos
+├── .env                         # Variables de entorno (no commitear)
+├── .env.example                 # Plantilla de variables de entorno
 └── package.json
 ```
 
-## Estados de Enlace
+---
 
-- `ACTIVE`: El enlace está funcionando correctamente
-- `DEAD`: El enlace no está disponible
-- `CHANGED`: El archivo asociado ha cambiado
-- `REDIRECTED`: El enlace redirige a otra URL
-- `RESTRICTED`: El enlace requiere autenticación o tiene restricciones
-- `ERROR`: Error al comprobar el enlace
-- `UNKNOWN`: Estado desconocido
+## 📈 Estados de los enlaces
 
-## Desarrollo
+| Estado | Descripción |
+|---|---|
+| `ACTIVE` | Enlace disponible y funcionando |
+| `DEAD` | Enlace caído o eliminado (404) |
+| `CHANGED` | El archivo cambió desde la última verificación |
+| `RESTRICTED` | Requiere autenticación o permisos (403) |
+| `REDIRECTED` | El enlace redirige a otra URL |
+| `ERROR` | Error de conexión o timeout |
+| `UNKNOWN` | Aún no se ha verificado |
 
-### Agregar un nuevo proveedor
+---
 
-1. Crear una clase que extienda `BaseProvider` en `src/server/providers/`
-2. Implementar los métodos `validateUrl` y `checkLink`
-3. Registrar el proveedor en `ProviderFactory`
-4. Agregar el proveedor a la base de datos inicial si es necesario
+## 🛠 Tecnologías
 
-### Extender el análisis multimedia
+| Capa | Tecnología |
+|---|---|
+| Frontend | React 19 + TypeScript |
+| Estilos | Tailwind CSS v4 + @tailwindcss/vite |
+| Gráficos | Recharts |
+| Bundler | Vite 8 |
+| Backend | Express 5 + TypeScript |
+| Base de datos | SQLite (better-sqlite3) |
+| Scheduler | node-cron |
+| Multimedia | fluent-ffmpeg |
+| Runtime dev | tsx + nodemon |
 
-El servicio `MediaAnalysisService` usa FFmpeg para analizar archivos. Puedes extenderlo para:
+---
 
-- Soportar más formatos de archivo
-- Extraer metadatos adicionales
-- Implementar análisis personalizado
+## 🧩 Agregar un nuevo proveedor
 
-## Licencia
+1. Crea `src/server/providers/MiProviderProvider.ts` extendiendo `BaseProvider`
+2. Implementa `validateUrl(url)` y `checkLink(url)`
+3. Regístralo en `ProviderFactory.ts`
+4. Agrégalo en la lista de proveedores por defecto en `database.ts`
 
-MIT
+---
+
+## 📝 Licencia
+
+MIT © BottleLink
+
+---
+
+<div align="center">
+  Desarrollado con TypeScript, React y SQLite
+</div>

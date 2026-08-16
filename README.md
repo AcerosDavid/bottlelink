@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/logobottlelink.png" alt="BottleLink" width="720" />
+<img src="public/logobottlelink.png" alt="BottleLink" width="200" />
 
 # BottleLink
 
@@ -64,7 +64,7 @@ sudo apt install ffmpeg
 ### 1. Clonar e instalar
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/AcerosDavid/bottlelink.git>
 cd bottlelink
 npm install
 ```
@@ -87,8 +87,6 @@ PROVIDER_FETCH_TIMEOUT_MS=30000
 VITE_API_BASE=/api
 VITE_SERVER_PORT=3001
 ```
-
-> **Nota:** `.env` está en `.gitignore` y nunca se sube al repositorio.  
 > Usa `.env.example` como referencia para otros desarrolladores.
 
 ### 3. Poblar con datos de ejemplo *(opcional)*

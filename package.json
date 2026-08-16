@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "server": "tsx src/server/index.ts",
-    "dev:server": "nodemon --exec tsx src/server/index.ts"
+    "dev:server": "nodemon --exec tsx src/server/index.ts",
+    "seed": "tsx src/server/seed.ts"
   },
   "dependencies": {
     "axios": "^1.19.0",
